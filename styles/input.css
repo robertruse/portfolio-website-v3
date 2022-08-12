@@ -1,0 +1,14 @@
+@tailwind base;
+
+@layer base {
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+}
+
+@tailwind components;
+@tailwind utilities;
