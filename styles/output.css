@@ -833,14 +833,6 @@ body {
   margin-right: 0.625rem;
 }
 
-.mt-0\.5 {
-  margin-top: 0.125rem;
-}
-
-.mt-0 {
-  margin-top: 0px;
-}
-
 .mt-1 {
   margin-top: 0.25rem;
 }
@@ -947,10 +939,6 @@ body {
 
 .flex-col {
   flex-direction: column;
-}
-
-.items-start {
-  align-items: flex-start;
 }
 
 .items-center {
@@ -1183,9 +1171,9 @@ body {
   padding-right: 0.25rem;
 }
 
-.py-6 {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+.py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
 }
 
 .pl-7 {
@@ -1415,10 +1403,6 @@ body {
 
   .sm\:gap-20 {
     gap: 5rem;
-  }
-
-  .sm\:gap-3 {
-    gap: 0.75rem;
   }
 
   .sm\:gap-4 {
