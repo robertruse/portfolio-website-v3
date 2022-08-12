@@ -459,7 +459,7 @@
                             class="space-y-3"
                         >
                             <template x-for="(item, index) in list" :key="index">
-                                <li class="flex items-start">
+                                <li class="items-centert flex">
                                     <img
                                         :src="item.icon"
                                         alt="Social media icon"
@@ -472,7 +472,7 @@
                                     <a
                                         x-text="item.name"
                                         :href="item.url"
-                                        class="mt-0.5 break-all rounded-sm px-1 text-left underline outline-none transition-all hover:text-geyser-500 hover:underline focus:underline focus:ring focus:ring-geyser-200"
+                                        class="break-all rounded-sm px-1 text-left underline outline-none transition-all hover:text-geyser-500 hover:underline focus:underline focus:ring focus:ring-geyser-200"
                                     ></a>
                                 </li>
                             </template>

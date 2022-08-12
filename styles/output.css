@@ -1009,10 +1009,6 @@ body {
   gap: 2rem;
 }
 
-.gap-4 {
-  gap: 1rem;
-}
-
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
@@ -1405,10 +1401,6 @@ body {
     align-items: flex-start;
   }
 
-  .sm\:justify-items-stretch {
-    justify-items: stretch;
-  }
-
   .sm\:gap-16 {
     gap: 4rem;
   }
@@ -1423,6 +1415,10 @@ body {
 
   .sm\:gap-20 {
     gap: 5rem;
+  }
+
+  .sm\:gap-3 {
+    gap: 0.75rem;
   }
 
   .sm\:gap-4 {
