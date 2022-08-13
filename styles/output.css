@@ -787,12 +787,16 @@ body {
   top: 0px;
 }
 
-.bottom-0 {
-  bottom: 0px;
+.top-\[65\] {
+  top: 65;
 }
 
 .right-0 {
   right: 0px;
+}
+
+.top-\[65px\] {
+  top: 65px;
 }
 
 .z-30 {
@@ -801,6 +805,10 @@ body {
 
 .z-50 {
   z-index: 50;
+}
+
+.z-40 {
+  z-index: 40;
 }
 
 .mx-auto {
@@ -859,10 +867,6 @@ body {
 
 .mt-2 {
   margin-top: 0.5rem;
-}
-
-.mt-1\.5 {
-  margin-top: 0.375rem;
 }
 
 .block {
@@ -957,6 +961,10 @@ body {
   max-width: 24rem;
 }
 
+.max-w-xs {
+  max-width: 20rem;
+}
+
 .flex-none {
   flex: none;
 }
@@ -1039,6 +1047,10 @@ body {
 
 .gap-1 {
   gap: 0.25rem;
+}
+
+.gap-4 {
+  gap: 1rem;
 }
 
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
@@ -1395,6 +1407,14 @@ body {
   filter: brightness(0) saturate(100%) invert(37%) sepia(32%) saturate(4199%) hue-rotate(336deg) brightness(95%) contrast(97%);
 }
 
+.\[filter\:brightness\(0\)_saturate\(100\%\)_invert\(42\%\)_sepia\(46\%\)_saturate\(227\%\)_hue-rotate\(133deg\)_brightness\(94\%\)_contrast\(92\%\)\] {
+  filter: brightness(0) saturate(100%) invert(42%) sepia(46%) saturate(227%) hue-rotate(133deg) brightness(94%) contrast(92%);
+}
+
+.\[filter\:_brightness\(0\)_saturate\(100\%\)_invert\(55\%\)_sepia\(15\%\)_saturate\(482\%\)_hue-rotate\(133deg\)_brightness\(95\%\)_contrast\(96\%\)\] {
+  filter: brightness(0) saturate(100%) invert(55%) sepia(15%) saturate(482%) hue-rotate(133deg) brightness(95%) contrast(96%);
+}
+
 .hover\:bg-geyser-50:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(245 248 247 / var(--tw-bg-opacity));
@@ -1471,6 +1491,10 @@ body {
 
 .group:hover .group-hover\:\!\[filter\:brightness\(0\)_saturate\(100\%\)_invert\(30\%\)_sepia\(96\%\)_saturate\(1193\%\)_hue-rotate\(24deg\)_brightness\(97\%\)_contrast\(89\%\)\;\] {
   filter: brightness(0) saturate(100%) invert(30%) sepia(96%) saturate(1193%) hue-rotate(24deg) brightness(97%) contrast(89%); !important;
+}
+
+.group:hover .group-hover\:\[filter\:brightness\(0\)_saturate\(100\%\)_invert\(42\%\)_sepia\(46\%\)_saturate\(227\%\)_hue-rotate\(133deg\)_brightness\(94\%\)_contrast\(92\%\)\] {
+  filter: brightness(0) saturate(100%) invert(42%) sepia(46%) saturate(227%) hue-rotate(133deg) brightness(94%) contrast(92%);
 }
 
 @media (min-width: 640px) {
