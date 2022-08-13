@@ -18,8 +18,10 @@
         <!-- Tailwind CSS -->
         <link href="/styles/output.css" rel="stylesheet" />
 
-        <!-- Alpine.js -->
+        <!-- Iodine.js -->
+        <script defer src="https://cdn.jsdelivr.net/npm/@kingshott/iodine@8.1.0/dist/iodine.min.umd.js"></script>
 
+        <!-- Alpine.js -->
         <script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
     </head>
 
@@ -491,65 +493,208 @@
                         <h3 class="text-3xl font-bold sm:text-4xl">Contact me</h3>
 
                         <form
-                            action="https://app.headlessforms.cloud/api/v1/form-submission/VZFlKsMVSm"
+                            x-data="{
+                                fields: {
+                                    firstname: {
+                                        value: '',
+                                        valid: true,
+                                        error: '',
+                                        rules: ['required'],
+                                        validate(callback) {
+                                            ({ valid: this.valid, error: this.error } = callback(this))
+                                        },
+                                    },
+                                    lastname: {
+                                        value: '',
+                                        valid: true,
+                                        error: '',
+                                        rules: ['required'],
+                                        validate(callback) {
+                                            ({ valid: this.valid, error: this.error } = callback(this))
+                                        },
+                                    },
+                                    email: {
+                                        value: '',
+                                        valid: true,
+                                        error: '',
+                                        rules: ['required', 'email'],
+                                        validate(callback) {
+                                            ({ valid: this.valid, error: this.error } = callback(this))
+                                        },
+                                    },
+                                    message: {
+                                        value: '',
+                                        valid: true,
+                                        error: '',
+                                        rules: ['required'],
+                                        validate(callback) {
+                                            ({ valid: this.valid, error: this.error } = callback(this))
+                                        },
+                                    },
+                                },
+                                validationCallback({ value, rules }) {
+                                    const report = Iodine.assert(value, rules)
+
+                                    return report ?? { valid: false, error: 'Invalid value' }
+                                },
+                                validateForm() {
+                                    const fields = Object.values(this.fields)
+
+                                    fields.forEach(field => {
+                                        field.validate(this.validationCallback)
+                                    })
+                                },
+                                isFormValid() {
+                                    const fields = Object.values(this.fields)
+
+                                    return fields.every(field => field.valid)
+                                },
+                                postData(data) {
+                                    fetch('https://app.headlessforms.cloud/api/v1/form-submission/VZFlKsMVSm', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'Accept': 'application/json',
+                                        },
+                                        body: new URLSearchParams(data)
+                                    })
+                                        .then(response => {
+                                            if (!response.ok) {
+                                                return Promise.reject(response)
+                                            }
+
+                                            return response.json();
+                                        })
+                                        .then(data => {
+                                            $dispatch('notify', { content: 'Message sent', type: 'success' })
+                                        })
+                                        .catch((response) => {
+                                            $dispatch('notify', { content: 'Error', type: 'error' })
+
+                                            // response.json().then(data => {
+                                            //     console.log(data)
+                                            // })
+                                        })
+                                },
+                                handleSubmit() {
+                                    this.validateForm()
+                                
+                                    if (!this.isFormValid()) return
+
+                                    const data = {
+                                        firstname: this.fields.firstname.value,
+                                        lastname: this.fields.lastname.value,
+                                        email: this.fields.email.value,
+                                        message: this.fields.message.value,
+                                    }
+
+                                    this.postData(data)
+                                },
+                            }"
+                            action2="https://app.headlessforms.cloud/api/v1/form-submission/VZFlKsMVSm"
                             method="POST"
                             class="flex flex-1 flex-col gap-6"
                             @submit.prevent
                         >
                             <div class="flex flex-col gap-6 sm:flex-row sm:gap-4">
-                                <label class="flex-1">
-                                    <span class="cursor-pointer">First name</span>
+                                <!-- First name -->
+                                <div class="flex-1">
+                                    <label>
+                                        <span class="cursor-pointer">First name</span>
 
-                                    <input
-                                        type="text"
-                                        name="firstname"
-                                        placeholder="First name"
-                                        required
-                                        class="mt-1 block w-full rounded-md border-gray-300 p-2.5 transition-all focus:border-geyser-300 focus:ring focus:ring-geyser-200 focus:ring-opacity-50"
-                                    />
-                                </label>
+                                        <input
+                                            x-model="fields.firstname.value"
+                                            type="text"
+                                            name="firstname"
+                                            placeholder="First name"
+                                            required
+                                            class="mt-1 block w-full rounded-md border-gray-300 p-2.5 transition-all focus:border-geyser-300 focus:ring focus:ring-geyser-200 focus:ring-opacity-50"
+                                            :class="fields.firstname.valid || 'border-red-500 focus:border-red-500 focus:ring-red-500'"
+                                            @input.debounce="fields.firstname.validate(validationCallback)"
+                                            @blur="fields.firstname.validate(validationCallback)"
+                                        />
+                                    </label>
 
-                                <label class="flex-1">
-                                    <span class="cursor-pointer">Last name</span>
+                                    <div x-show="fields.firstname.valid === false">
+                                        <p x-text="fields.firstname.error" class="mt-2 text-sm text-red-500"></p>
+                                    </div>
+                                </div>
 
-                                    <input
-                                        type="text"
-                                        name="lastname"
-                                        placeholder="Last name"
-                                        required
-                                        class="mt-1 block w-full rounded-md border-gray-300 p-2.5 transition-all focus:border-geyser-300 focus:ring focus:ring-geyser-200 focus:ring-opacity-50"
-                                    />
-                                </label>
+                                <!-- Last name -->
+                                <div class="flex-1">
+                                    <label class="flex-1">
+                                        <span class="cursor-pointer">Last name</span>
+
+                                        <input
+                                            x-model="fields.lastname.value"
+                                            type="text"
+                                            name="lastname"
+                                            placeholder="Last name"
+                                            required
+                                            class="mt-1 block w-full rounded-md border-gray-300 p-2.5 transition-all focus:border-geyser-300 focus:ring focus:ring-geyser-200 focus:ring-opacity-50"
+                                            :class="fields.lastname.valid || 'border-red-500 focus:border-red-500 focus:ring-red-500'"
+                                            @input.debounce="fields.lastname.validate(validationCallback)"
+                                            @blur="fields.lastname.validate(validationCallback)"
+                                        />
+                                    </label>
+
+                                    <div x-show="fields.lastname.valid === false">
+                                        <p x-text="fields.lastname.error" class="mt-2 text-sm text-red-500"></p>
+                                    </div>
+                                </div>
                             </div>
 
-                            <label>
-                                <span class="cursor-pointer">Email</span>
+                            <!-- Email -->
+                            <div>
+                                <label>
+                                    <span class="cursor-pointer">Email</span>
 
-                                <input
-                                    type="email"
-                                    name="email"
-                                    placeholder="Email"
-                                    required
-                                    class="mt-1 block w-full rounded-md border-gray-300 p-2.5 transition-all focus:border-geyser-300 focus:ring focus:ring-geyser-200 focus:ring-opacity-50"
-                                />
-                            </label>
+                                    <input
+                                        x-model="fields.email.value"
+                                        type="email"
+                                        name="email"
+                                        placeholder="Email"
+                                        required
+                                        class="mt-1 block w-full rounded-md border-gray-300 p-2.5 transition-all focus:border-geyser-300 focus:ring focus:ring-geyser-200 focus:ring-opacity-50"
+                                        :class="fields.email.valid || 'border-red-500 focus:border-red-500 focus:ring-red-500'"
+                                        @input.debounce="fields.email.validate(validationCallback)"
+                                        @blur="fields.email.validate(validationCallback)"
+                                    />
+                                </label>
 
-                            <label>
-                                <span class="cursor-pointer">Message</span>
+                                <div x-show="fields.email.valid === false">
+                                    <p x-text="fields.email.error" class="mt-2 text-sm text-red-500"></p>
+                                </div>
+                            </div>
 
-                                <textarea
-                                    rows="4"
-                                    name="message"
-                                    placeholder="Message"
-                                    required
-                                    class="mt-1 block w-full rounded-md border-gray-300 p-2.5 transition-all focus:border-geyser-300 focus:ring focus:ring-geyser-200 focus:ring-opacity-50"
-                                ></textarea>
-                            </label>
+                            <!-- Message -->
+                            <div>
+                                <label>
+                                    <span class="cursor-pointer">Message</span>
+
+                                    <textarea
+                                        x-model="fields.message.value"
+                                        rows="4"
+                                        name="message"
+                                        placeholder="Message"
+                                        required
+                                        class="mt-1 block w-full rounded-md border-gray-300 p-2.5 transition-all focus:border-geyser-300 focus:ring focus:ring-geyser-200 focus:ring-opacity-50"
+                                        :class="fields.message.valid || 'border-red-500 focus:border-red-500 focus:ring-red-500'"
+                                        @input.debounce="fields.message.validate(validationCallback)"
+                                        @blur="fields.message.validate(validationCallback)"
+                                    ></textarea>
+                                </label>
+
+                                <div x-show="fields.message.valid === false">
+                                    <p x-text="fields.message.error" class="mt-2 text-sm text-red-500"></p>
+                                </div>
+                            </div>
 
                             <div class="mt-4">
                                 <button
                                     type="submit"
                                     class="align-self-start group flex w-full items-center justify-center rounded-lg bg-energy-yellow-300 py-2.5 px-[30px] pr-7 text-left font-medium outline-none transition-all hover:bg-energy-yellow-400 focus:ring focus:ring-energy-yellow-400 sm:w-auto"
+                                    @click.prevent="handleSubmit"
                                 >
                                     <span class="mr-2 sm:hidden">Submit</span>
                                     <span class="mr-2 hidden sm:inline-block">Submit your message</span>
