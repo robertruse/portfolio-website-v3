@@ -538,23 +538,26 @@
                                     return report ?? { valid: false, error: 'Invalid value' }
                                 },
                                 validateForm() {
-                                    const fields = Object.values(this.fields)
-
-                                    fields.forEach(field => {
+                                    Object.values(this.fields).forEach(field => {
                                         field.validate(this.validationCallback)
                                     })
                                 },
                                 isFormValid() {
-                                    const fields = Object.values(this.fields)
-
-                                    return fields.every(field => field.valid)
+                                    return Object.values(this.fields).every(field => field.valid)
                                 },
-                                clearFormData() {
-                                    const fields = Object.values(this.fields)
-
-                                    fields.forEach(field => {
+                                clearFormValues() {
+                                    Object.values(this.fields).forEach(field => {
                                         field.value = ''
                                     })
+                                },
+                                getFormData() {
+                                    const data = {}
+
+                                    for (const field in this.fields) {
+                                        data[field] = this.fields[field].value
+                                    }
+
+                                    return data
                                 },
                                 postData(url = '', data = {}) {
                                     fetch(url, {
@@ -575,14 +578,14 @@
                                         })
                                         .then(data => {
                                             $dispatch('notify', { content: 'Message sent!', type: 'success' })
-                                            this.clearFormData()
+                                            this.clearFormValues()
                                         })
                                         .catch((response) => {
                                             $dispatch('notify', { content: 'Internal error!', type: 'error' })
 
-                                            response.json().then(data => {
-                                                console.log(data)
-                                            })
+                                            // response.json().then(data => {
+                                            //     console.log(data)
+                                            // })
                                         })
                                 },
                                 handleSubmit() {
@@ -590,17 +593,13 @@
                                 
                                     if (!this.isFormValid()) return
 
-                                    const data = {
-                                        firstname: this.fields.firstname.value,
-                                        lastname: this.fields.lastname.value,
-                                        email: this.fields.email.value,
-                                        message: this.fields.message.value,
-                                    }
-
-                                    this.postData('https://app.headlessforms.cloud/api/v1/form-submission/VZFlKsMVSm', data)
+                                    this.postData(
+                                        'https://app.headlessforms.cloud/api/v1/form-submission/VZFlKsMVSm',
+                                        this.getFormData(),
+                                    )
                                 },
                             }"
-                            action2="https://app.headlessforms.cloud/api/v1/form-submission/VZFlKsMVSm"
+                            action=""
                             method="POST"
                             class="flex flex-1 flex-col gap-6"
                             @submit.prevent
