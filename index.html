@@ -19,6 +19,7 @@
         <link href="/styles/output.css" rel="stylesheet" />
 
         <!-- Alpine.js -->
+        <!-- <script defer src="scripts/components.js"></script> -->
         <script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
     </head>
 
@@ -28,6 +29,10 @@
             x-data="{ 
                 atTop: true,
                 list: [
+                    {
+                        name: 'Home',
+                        href: '#hero',
+                    },
                     {
                         name: 'Skills',
                         href: '#skills',
@@ -564,27 +569,171 @@
             </div>
         </section>
 
+        <!-- Notifications -->
+        <aside
+            x-data="{
+                notifications: [],
+                add(e) {
+                    this.notifications.push({
+                        id: e.timeStamp,
+                        type: e.detail.type,
+                        content: e.detail.content,
+                    })
+                },
+                remove(notification) {
+                    this.notifications = this.notifications.filter(i => i.id !== notification.id)
+                },
+            }"
+            role="status"
+            aria-live="polite"
+            class="fixed bottom-0 right-0 z-50 flex w-full max-w-sm flex-col space-y-4 p-4 sm:justify-start"
+            @notify.window="add($event)"
+        >
+            <!-- Notification -->
+            <template x-for="notification in notifications" :key="notification.id">
+                <div
+                    x-data="{
+                        show: false,
+                        init() {
+                            this.$nextTick(() => this.show = true)
+
+                            setTimeout(() => this.transitionOut(), 5000)
+                        },
+                        transitionOut() {
+                            this.show = false
+
+                            setTimeout(() => this.remove(this.notification), 500)
+                        },
+                    }"
+                    x-show="show"
+                    x-transition.duration.500ms
+                    class="pointer-events-auto relative w-full rounded-lg border border-gray-200 bg-white p-2.5 drop-shadow-lg"
+                >
+                    <div class="flex items-start gap-1">
+                        <!-- Icons -->
+                        <div class="flex-none p-2">
+                            <template x-if="notification.type === 'info'">
+                                <img
+                                    src="images/heroicons/outline/information-circle.svg"
+                                    alt="Information icon"
+                                    width="20"
+                                    height="20"
+                                    aria-label="Information:"
+                                    class="h-7 w-auto [filter:brightness(0)_saturate(100%)_invert(45%)_sepia(42%)_saturate(4176%)_hue-rotate(202deg)_brightness(99%)_contrast(95%)]"
+                                />
+                            </template>
+
+                            <template x-if="notification.type === 'success'">
+                                <img
+                                    src="images/heroicons/outline/check-circle.svg"
+                                    alt="Success icon"
+                                    width="20"
+                                    height="20"
+                                    aria-label="Success:"
+                                    class="h-7 w-auto [filter:brightness(0)_saturate(100%)_invert(62%)_sepia(54%)_saturate(704%)_hue-rotate(89deg)_brightness(92%)_contrast(80%)]"
+                                />
+                            </template>
+
+                            <template x-if="notification.type === 'error'">
+                                <img
+                                    src="images/heroicons/outline/exclamation-circle.svg"
+                                    alt="Error icon"
+                                    width="20"
+                                    height="20"
+                                    aria-label="Error:"
+                                    class="h-7 w-auto [filter:brightness(0)_saturate(100%)_invert(37%)_sepia(32%)_saturate(4199%)_hue-rotate(336deg)_brightness(95%)_contrast(97%)]"
+                                />
+                            </template>
+                        </div>
+
+                        <!-- Text -->
+                        <div class="flex-1 break-all pt-2.5 pr-2.5">
+                            <p x-text="notification.content"></p>
+                        </div>
+
+                        <!-- Remove button -->
+                        <button
+                            type="button"
+                            aria-label="Close notification"
+                            class="flex flex-none items-center justify-center rounded-lg bg-transparent p-2.5 font-medium outline-none transition-all hover:bg-geyser-50 focus:ring focus:ring-geyser-100"
+                            @click="transitionOut()"
+                        >
+                            <img
+                                src="images/heroicons/outline/x.svg"
+                                alt="Close icon"
+                                width="20"
+                                height="20"
+                                class="h-6 w-auto"
+                            />
+                        </button>
+                    </div>
+                </div>
+            </template>
+        </aside>
+
+        <!-- Examples of how to dispatch the `notify` event with variable text and type -->
+        <div class="hidden bg-geyser-50 p-10">
+            <form
+                x-data="{
+                    content: 'Something happened!',
+                    type: 'info',
+                }"
+                class="mx-auto max-w-lg"
+                x-on:submit.prevent="$dispatch('notify', { content, type })"
+            >
+                <div>
+                    <label for="message" class="text-sm font-bold"> Message </label>
+
+                    <input
+                        id="message"
+                        x-model="content"
+                        type="text"
+                        class="mt-1 block w-full rounded-md border border-gray-200 px-3 py-2.5"
+                    />
+                </div>
+
+                <div class="mt-4">
+                    <label for="type" class="text-sm font-bold"> Type </label>
+
+                    <select
+                        id="type"
+                        x-model="type"
+                        type="text"
+                        class="mt-1 block w-full rounded-md border border-gray-200 px-3 py-2.5"
+                    >
+                        <option value="info">Info</option>
+                        <option value="success">Success</option>
+                        <option value="error">Error</option>
+                    </select>
+                </div>
+
+                <button class="mt-6 inline-flex rounded-md border border-gray-200 bg-white px-5 py-2.5">
+                    Dispatch notification
+                </button>
+            </form>
+        </div>
+
         <!-- Footer -->
         <footer
             id="footer"
             x-data="{
                 get footerText() {
                     currentDate = new Date()
-                    return `Robert Ruse ${currentDate.getFullYear()}`
+                    return `© Robert Ruse ${currentDate.getFullYear()}`
                 }
             }"
             class="border-t border-geyser-100 bg-geyser-50"
         >
             <div class="mx-auto max-w-2xl px-10 py-5 xl:max-w-7xl">
                 <div class="flex items-center justify-center">
-                    <img
+                    <!-- <img
                         src="images/fontawesome/copyright-solid.svg"
                         alt="Social media icon"
                         target="_blank"
                         width="448"
                         height="512"
                         class="mr-2.5 h-6 w-auto [filter:brightness(0)_saturate(100%)_invert(87%)_sepia(23%)_saturate(127%)_hue-rotate(128deg)_brightness(92%)_contrast(89%);]"
-                    />
+                    /> -->
 
                     <span x-text="footerText"></span>
                 </div>
