@@ -1161,8 +1161,8 @@ body {
   padding: 2.5rem;
 }
 
-.p-5 {
-  padding: 1.25rem;
+.p-8 {
+  padding: 2rem;
 }
 
 .p-2\.5 {
@@ -1171,14 +1171,6 @@ body {
 
 .p-4 {
   padding: 1rem;
-}
-
-.p-7 {
-  padding: 1.75rem;
-}
-
-.p-8 {
-  padding: 2rem;
 }
 
 .px-7 {
