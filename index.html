@@ -617,7 +617,7 @@
                                             type="text"
                                             name="firstname"
                                             placeholder="First name"
-                                            required
+                                            :aria-invalid="!fields.firstname.valid"
                                             class="mt-1 block w-full rounded-md border-gray-300 p-2.5 transition-all focus:border-geyser-300 focus:ring focus:ring-geyser-200 focus:ring-opacity-50"
                                             :class="fields.firstname.valid || 'border-red-500 focus:border-red-500 focus:ring-red-500'"
                                             @blur="fields.firstname.validate(validationCallback)"
@@ -639,7 +639,7 @@
                                             type="text"
                                             name="lastname"
                                             placeholder="Last name"
-                                            required
+                                            :aria-invalid="!fields.lastname.valid"
                                             class="mt-1 block w-full rounded-md border-gray-300 p-2.5 transition-all focus:border-geyser-300 focus:ring focus:ring-geyser-200 focus:ring-opacity-50"
                                             :class="fields.lastname.valid || 'border-red-500 focus:border-red-500 focus:ring-red-500'"
                                             @blur="fields.lastname.validate(validationCallback)"
@@ -662,7 +662,7 @@
                                         type="email"
                                         name="email"
                                         placeholder="Email"
-                                        required
+                                        :aria-invalid="!fields.email.valid"
                                         class="mt-1 block w-full rounded-md border-gray-300 p-2.5 transition-all focus:border-geyser-300 focus:ring focus:ring-geyser-200 focus:ring-opacity-50"
                                         :class="fields.email.valid || 'border-red-500 focus:border-red-500 focus:ring-red-500'"
                                         @blur="fields.email.validate(validationCallback)"
@@ -684,7 +684,7 @@
                                         rows="4"
                                         name="message"
                                         placeholder="Message"
-                                        required
+                                        :aria-invalid="!fields.message.valid"
                                         class="mt-1 block w-full rounded-md border-gray-300 p-2.5 transition-all focus:border-geyser-300 focus:ring focus:ring-geyser-200 focus:ring-opacity-50"
                                         :class="fields.message.valid || 'border-red-500 focus:border-red-500 focus:ring-red-500'"
                                         @blur="fields.message.validate(validationCallback)"
