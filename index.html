@@ -556,14 +556,15 @@
                                         field.value = ''
                                     })
                                 },
-                                postData(data) {
-                                    fetch('https://app.headlessforms.cloud/api/v1/form-submission/VZFlKsMVSm', {
+                                postData(url = '', data = {}) {
+                                    fetch(url, {
                                         method: 'POST',
                                         headers: {
                                             'Content-Type': 'application/json',
                                             'Accept': 'application/json',
                                         },
-                                        body: new URLSearchParams(data)
+                                        // body: new URLSearchParams(data)
+                                        body: JSON.stringify(data),
                                     })
                                         .then(response => {
                                             if (!response.ok) {
@@ -573,15 +574,15 @@
                                             return response.json();
                                         })
                                         .then(data => {
-                                            $dispatch('notify', { content: 'Message sent', type: 'success' })
+                                            $dispatch('notify', { content: 'Message sent!', type: 'success' })
                                             this.clearFormData()
                                         })
                                         .catch((response) => {
-                                            $dispatch('notify', { content: 'Error', type: 'error' })
+                                            $dispatch('notify', { content: 'Internal error!', type: 'error' })
 
-                                            // response.json().then(data => {
-                                            //     console.log(data)
-                                            // })
+                                            response.json().then(data => {
+                                                console.log(data)
+                                            })
                                         })
                                 },
                                 handleSubmit() {
@@ -596,7 +597,7 @@
                                         message: this.fields.message.value,
                                     }
 
-                                    this.postData(data)
+                                    this.postData('https://app.headlessforms.cloud/api/v1/form-submission/VZFlKsMVSm', data)
                                 },
                             }"
                             action2="https://app.headlessforms.cloud/api/v1/form-submission/VZFlKsMVSm"
