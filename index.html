@@ -297,7 +297,7 @@
                             <div
                                 class="flex flex-col items-center gap-7 sm:items-start sm:border-l sm:border-gray-200 sm:pl-11 xl:items-center xl:border-none xl:pl-0"
                             >
-                                <h3 x-text="card.name" class="break-all text-2xl font-bold sm:text-3xl"></h3>
+                                <h3 x-text="card.name" class="break-all text-3xl font-bold sm:text-4xl"></h3>
 
                                 <hr class="min-w-full sm:hidden xl:block" />
 
@@ -391,7 +391,7 @@
                                 class="flex flex-col items-center justify-center gap-7 text-center xl:items-start xl:text-start"
                                 :class="index % 2 === 0 && 'xl:col-start-1 xl:row-start-1'"
                             >
-                                <h3 x-text="project.name" class="text-2xl font-bold sm:text-3xl"></h3>
+                                <h3 x-text="project.name" class="text-3xl font-bold sm:text-4xl"></h3>
 
                                 <p x-text="project.description" class="mb-3 sm:max-w-lg xl:max-w-md"></p>
 
@@ -461,7 +461,7 @@
                 <div class="grid gap-10 sm:gap-12 xl:grid-cols-3 xl:gap-14">
                     <template x-for="(project, index) in projects" :key="index">
                         <div class="flex flex-col gap-6 rounded-xl border border-gray-200 bg-white p-10 drop-shadow-xl">
-                            <h3 x-text="project.name" class="text-2xl font-bold sm:text-3xl"></h3>
+                            <h3 x-text="project.name" class="text-3xl font-bold sm:text-4xl"></h3>
 
                             <p x-text="project.description" class="mb-3 sm:max-w-lg xl:max-w-md"></p>
 
@@ -511,7 +511,7 @@
                                                         <h3
                                                             x-dialog:title
                                                             x-text="project.name"
-                                                            class="text-2xl font-bold sm:text-3xl"
+                                                            class="text-3xl font-bold sm:text-4xl"
                                                         ></h3>
                                                     </div>
 
@@ -661,7 +661,7 @@
                     <div
                         class="flex flex-col gap-7 rounded-xl border border-gray-200 bg-white p-8 drop-shadow-xl sm:p-10 xl:flex-col"
                     >
-                        <h3 class="text-2xl font-bold sm:text-3xl">Contact me</h3>
+                        <h3 class="text-3xl font-bold sm:text-4xl">Contact me</h3>
 
                         <form
                             x-data="{
