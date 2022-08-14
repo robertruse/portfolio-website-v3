@@ -349,13 +349,20 @@
                         demo: 'https://robertruse.github.io/rock-paper-scissors/',
                         code: 'https://github.com/robertruse/rock-paper-scissors',
                     },
-                    // {
-                    //     name: 'Google Homepage',
-                    //     description: 'A UI project where I designed and built my version of the Google homepage. I used HTML5, CSS3, and a bit of JavaScript for the Dark Mode theme and menu.',
-                    //     mockup: 'images/mockup-google.png',
-                    //     demo: 'https://robertruse.github.io/google-neumorphism/',
-                    //     code: 'https://github.com/robertruse/google-neumorphism',
-                    // },
+                    {
+                        name: 'Task tracker',
+                        description: 'A simple Google Keep clone built with React.js, Bootstrap CSS and Popper.js.',
+                        mockup: 'images/mockup-tsks.png',
+                        demo: 'https://robertruse.github.io/tsks/',
+                        code: 'https://github.com/robertruse/tsks',
+                    },
+                    {
+                        name: 'Google Homepage',
+                        description: 'A neomorphic soft UI redesign concept of the Google Homepage. I used HTML5, CSS3, and a bit of JavaScript for the Dark Mode theme and menu.',
+                        mockup: 'images/mockup-google.png',
+                        demo: 'https://robertruse.github.io/google-neumorphism/',
+                        code: 'https://github.com/robertruse/google-neumorphism',
+                    },
                 ],
             }"
         >
@@ -368,7 +375,7 @@
                     <template x-for="(project, index) in projects" :key="index">
                         <article
                             class="grid grid-cols-1 gap-10 py-10 sm:gap-12 xl:grid-cols-2"
-                            :class="index % 2 !== 0 && 'justify-items-end'"
+                            :class="index % 2 !== 0 && 'xl:justify-items-end'"
                         >
                             <div :class="index % 2 === 0 && 'xl:col-start-2 xl:row-start-1'">
                                 <img
@@ -456,7 +463,8 @@
                     },
                 ],
             }"
-            class="border-t border-gray-200"
+            class="hidden border-t border-gray-200"
+            x-show="false"
         >
             <div class="mx-auto max-w-2xl px-10 py-20 xl:max-w-7xl xl:py-32">
                 <hr class="mx-auto mb-10 w-14 border-t-[6px] border-geyser-100" />
