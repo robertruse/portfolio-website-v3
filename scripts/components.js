@@ -1,27 +1,3 @@
-// const validators = {
-//     templateName: {
-//         name: 'Template Name',
-//         errorMessage: 'Please use Alphanumeric or (, ,),_,-,,,: characters',
-//         validator: {
-//             pattern: '^[A-Za-z0-9 :,_()-]+$',
-//         },
-//     },
-//     cwe: {
-//         name: 'CWE',
-//         errorMessage: 'Please use the following format CWE-id or leave it N/A',
-//         validator: {
-//             pattern: '^(CWE-[0-9]{1,5}|N/A)$|^$',
-//         },
-//     },
-//     owasp: {
-//         name: 'OWASP',
-//         errorMessage: 'Please use the following format A# - Owasp Top 10 Valid Cathegory Name or leave it N/A',
-//         validator: {
-//             pattern: '^(A[0-9]{1,2} - [A-Z].*|N/A)$|^$',
-//         },
-//     },
-// }
-
 document.addEventListener('alpine:init', () => {
     // Directives
     Alpine.directive('tooltip', (el, { expression }, { evaluate }) => {
