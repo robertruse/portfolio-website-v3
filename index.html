@@ -435,25 +435,11 @@
             </div>
         </section>
 
-        <!-- Other work -->
+        <!-- Archive -->
         <section
             id="work"
             x-data="{
                 projects: [
-                    {
-                        name: 'Task tracker',
-                        description: 'A simple Google Keep clone built with React and Bootstrap.',
-                        mockup: 'images/mockup-tsks.png',
-                        demo: 'https://robertruse.github.io/tsks/',
-                        code: 'https://github.com/robertruse/tsks',
-                    },
-                    {
-                        name: 'Google Homepage',
-                        description: 'A neomorphic soft UI redesign concept of the Google Homepage. I used HTML5, CSS3, and a bit of JavaScript for the Dark Mode theme and menu.',
-                        mockup: 'images/mockup-google.png',
-                        demo: 'https://robertruse.github.io/google-neumorphism/',
-                        code: 'https://github.com/robertruse/google-neumorphism',
-                    },
                     {
                         name: 'Netflix Homepage',
                         description: 'A clone of the Netflix landing page using HTML5, CSS3, and a bit of JavaScript for the FAQ menu.',
@@ -464,6 +450,7 @@
                 ],
             }"
             class="hidden border-t border-gray-200"
+            x-cloak
             x-show="false"
         >
             <div class="mx-auto max-w-2xl px-10 py-20 xl:max-w-7xl xl:py-32">
@@ -1005,48 +992,6 @@
                 </div>
             </template>
         </div>
-
-        <!-- Notifications form -->
-        <!-- <div class="hidden bg-geyser-50 p-10">
-            <form
-                x-data="{
-                    content: 'Something happened!',
-                    type: 'info',
-                }"
-                class="mx-auto max-w-lg"
-                x-on:submit.prevent="$dispatch('notify', { content, type })"
-            >
-                <div>
-                    <label for="message" class="text-sm font-bold"> Message </label>
-
-                    <input
-                        id="message"
-                        x-model="content"
-                        type="text"
-                        class="mt-1 block w-full rounded-md border border-gray-200 px-3 py-2.5"
-                    />
-                </div>
-
-                <div class="mt-4">
-                    <label for="type" class="text-sm font-bold"> Type </label>
-
-                    <select
-                        id="type"
-                        x-model="type"
-                        type="text"
-                        class="mt-1 block w-full rounded-md border border-gray-200 px-3 py-2.5"
-                    >
-                        <option value="info">Info</option>
-                        <option value="success">Success</option>
-                        <option value="error">Error</option>
-                    </select>
-                </div>
-
-                <button class="mt-6 inline-flex rounded-md border border-gray-200 bg-white px-5 py-2.5">
-                    Dispatch notification
-                </button>
-            </form>
-        </div> -->
 
         <!-- Footer -->
         <footer

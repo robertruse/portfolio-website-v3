@@ -197,29 +197,4 @@ document.addEventListener('alpine:init', () => {
             this.open = !this.open
         },
     }))
-
-    // Calendar
-    Alpine.data('calendar', (props) => ({
-        value: props?.defaultValue ?? '',
-        mode: props?.defaultMode ?? 'single',
-        appendTo: props?.defaultAppendTo ?? undefined,
-        getEl(props) {
-            return props?.defaultEl ?? this.$el
-        },
-        init() {
-            let picker = flatpickr(this.getEl(props), {
-                locale: { rangeSeparator: ' - ' },
-                appendTo: this.appendTo,
-                mode: this.mode,
-                dateFormat: 'M d, Y',
-                defaultDate: this.value,
-                onChange: (date, dateString) => {
-                    this.value = dateString.split(' - ')
-                },
-            })
-            this.$watch('value', (value) => {
-                picker.setDate(value)
-            })
-        },
-    }))
 })
